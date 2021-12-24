@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3UploaderFunction", "S3UploaderFunction\S3UploaderFunction.csproj", "{BD0A7487-0A89-4168-8C11-2EAE2EFF6D8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3Uploader", "S3Uploader\S3Uploader.csproj", "{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD0A7487-0A89-4168-8C11-2EAE2EFF6D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0A7487-0A89-4168-8C11-2EAE2EFF6D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0A7487-0A89-4168-8C11-2EAE2EFF6D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0A7487-0A89-4168-8C11-2EAE2EFF6D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

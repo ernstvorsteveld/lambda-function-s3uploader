@@ -1,0 +1,46 @@
+= S3 Uploader Azure function AND AWS Lambda
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 4
+
+== Azure function setup
+
+.Create project
+[source,bash]
+----
+# Create solution
+dotnet new sln -n S3Uploader
+
+# Create Azure function project
+func init S3UploaderFunction --dotnet
+
+# Add to solution
+dotnet sln S3Uploader.sln add S3UploaderFunction/S3UploaderFunction.csproj
+
+# Create function
+func new --name S3UploaderFunction --template "HTTP trigger" --authlevel "anonymous"
+
+# Create execution function
+dotnet new classlib -o S3Uploader
+
+# Add to solution
+dotnet sln S3Uploader.sln add S3Uploader/S3Uploader.csproj
+
+# Reference projects
+dotnet add S3UploaderFunction/S3UploaderFunction.csproj reference S3Uploader/S3Uploader.csproj
+----
+
+== Dependencies
+
+.Install dependencies
+[source,bash]
+----
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Http --version 3.0.13
+dotnet add package Microsoft.Azure.Functions.Extensions --version 1.1.0
+dotnet add package Microsoft.Azure.Functions.Worker.Sdk --version 1.3.0
+dotnet add package Microsoft.Extensions.DependencyInjection --version 6.0.0
+
+# S3Uploader
+dotnet add package AWSSDK.S3 --version 3.7.7.5
+dotnet add package HttpMultipartParser --version 5.0.1
+----
