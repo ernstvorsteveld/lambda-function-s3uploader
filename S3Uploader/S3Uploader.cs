@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HttpMultipartParser;
@@ -17,43 +16,35 @@ namespace S3Uploader
             _propertyGetter = propertyGetter;
         }
 
-        public async Task<BucketResponse> Write(Stream stream)
+        public async Task Write(Stream stream)
         {
             MultipartFormDataParser bodyParser = await MultipartFormDataParser.ParseAsync(stream);
             FilePart? file = bodyParser.Files.FirstOrDefault(x => x.Name == "logo");
             Validate(file);
             string id = bodyParser.GetParameterValue("id");
-            return await _s3FilesystemIo.Write(id, file);
+            BucketResponse response = await _s3FilesystemIo.Write(id, file);
+            if (!response.IsSuccess())
+            {
+                throw new S3OperationFailedS3Exception(response);
+            }
         }
 
         private void Validate(FilePart? file)
         {
             if (file == null)
             {
-                throw new LogoNotPresentException();
+                throw new LogoNotPresentS3Exception();
             }
 
             if (!file.ContentType.Contains("image"))
             {
-                throw new ContentTypeNotSupportedException();
+                throw new ContentTypeNotSupportedS3Exception();
             }
 
             if (file.Data.Length > _propertyGetter.GetMaxSize())
             {
-                throw new FileSizeTooLargeException();
+                throw new FileSizeTooLargeS3Exception();
             }
         }
-    }
-
-    public class FileSizeTooLargeException : Exception
-    {
-    }
-
-    public class ContentTypeNotSupportedException : Exception
-    {
-    }
-
-    public class LogoNotPresentException : Exception
-    {
     }
 }

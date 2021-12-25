@@ -44,3 +44,11 @@ dotnet add package Microsoft.Extensions.DependencyInjection --version 6.0.0
 dotnet add package AWSSDK.S3 --version 3.7.7.5
 dotnet add package HttpMultipartParser --version 5.0.1
 ----
+
+== Ansible
+
+.Installation
+[source,bash]
+----
+pip install ansible[azure]
+----

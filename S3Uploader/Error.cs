@@ -1,4 +1,4 @@
-namespace S3UploaderFunction
+namespace S3Uploader
 {
     public class Error
     {

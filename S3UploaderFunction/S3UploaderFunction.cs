@@ -2,12 +2,10 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using S3Uploader;
-
 
 // https://github.com/WestDiscGolf/MinimalApiFunctions
 
@@ -31,48 +29,14 @@ namespace S3UploaderFunction
             log.LogInformation("S3UploaderFunction C# HTTP trigger function processed a request");
             try
             {
-                BucketResponse bucketResponse = await _s3Uploader.Write(req.Body);
-                if (!bucketResponse.IsSuccess())
-                {
-                    return new BadRequestObjectResult(
-                        new Error
-                        {
-                            Description = "Failure storing logo",
-                            Code = "LOGO00005"
-                        });
-                }
-
+                await _s3Uploader.Write(req.Body);
                 return new OkResult();
             }
-            catch (LogoNotPresentException e)
+            catch (AbstractS3Exception e)
             {
-                log.LogError("Missing logo file");
-                return new BadRequestObjectResult(
-                    new Error
-                    {
-                        Description = "Missing logo file",
-                        Code = "LOGO00002"
-                    });
-            }
-            catch (UnsupportedContentTypeException e)
-            {
-                log.LogError("Content type not supported");
-                return new BadRequestObjectResult(
-                    new Error
-                    {
-                        Description = "Content type not supported",
-                        Code = "LOGO00003"
-                    });
-            }
-            catch (FileSizeTooLargeException e)
-            {
-                log.LogError("File too large");
-                return new BadRequestObjectResult(
-                    new Error
-                    {
-                        Description = "File too large",
-                        Code = "LOGO00004"
-                    });
+                string msg = e.GetMessage();
+                log.LogError("Error while handling S3 request: {Msg}", msg);
+                return new BadRequestObjectResult(e.Get());
             }
             catch (Exception e)
             {
@@ -83,8 +47,8 @@ namespace S3UploaderFunction
                     {
                         Description = "Other Error, contact system administrator",
                         Code = "LOGO00001"
-                    });
-                ;
+                    }
+                );
             }
         }
     }

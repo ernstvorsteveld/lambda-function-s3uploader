@@ -5,6 +5,6 @@ namespace S3Uploader
 {
     public interface IFilesystemIo
     {
-        Task<BucketResponse> Write(Stream filePart);
+        Task Write(Stream filePart);
     }
 }
