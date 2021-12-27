@@ -34,14 +34,12 @@ namespace S3UploaderFunction
             }
             catch (AbstractS3Exception e)
             {
-                string msg = e.GetMessage();
-                log.LogError("Error while handling S3 request: {Msg}", msg);
+                log.LogError("Error while handling S3 request: {Msg}", e.Get());
                 return new BadRequestObjectResult(e.Get());
             }
             catch (Exception e)
             {
-                var msg = e.Message;
-                log.LogError("Other exception {Msg}", msg);
+                log.LogError("Other exception {Msg}", e.Message);
                 return new BadRequestObjectResult(
                     new Error("LOGO00001", "Other Error, contact system administrator"));
             }

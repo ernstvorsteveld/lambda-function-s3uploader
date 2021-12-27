@@ -41,14 +41,12 @@ namespace S3UploaderLambda
             }
             catch (AbstractS3Exception e)
             {
-                string msg = e.GetMessage();
-                LambdaLogger.Log($"Error while handling S3 request: {msg}");
+                LambdaLogger.Log($"Error while handling S3 request: {e.Get()}");
                 return JsonSerializer.Serialize(new BadRequestObjectResult(e.Get()));
             }
             catch (Exception e)
             {
-                var msg = e.Message;
-                LambdaLogger.Log($"Other exception {msg}");
+                LambdaLogger.Log($"Other exception {e.Message}");
                 return JsonSerializer.Serialize(new BadRequestObjectResult(
                     new Error("LOGO00001", "Other Error, contact system administrator")));
             }
