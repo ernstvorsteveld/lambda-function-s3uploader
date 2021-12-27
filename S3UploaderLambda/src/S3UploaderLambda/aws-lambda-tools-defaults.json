@@ -8,9 +8,9 @@
   "profile": "",
   "region": "",
   "configuration": "Release",
-  "framework": "netcoreapp3.1",
-  "function-runtime": "dotnetcore3.1",
+  "framework": "net6.0",
+  "function-runtime": "net6.0",
   "function-memory-size": 256,
   "function-timeout": 30,
-  "function-handler": "S3UploaderLambda::S3UploaderLambda.Function::FunctionHandler"
+  "function-handler": "S3UploaderLambda::S3UploaderLambda.S3UploaderLambda::FunctionHandler"
 }
