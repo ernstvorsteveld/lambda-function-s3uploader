@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using HttpMultipartParser;
@@ -27,7 +25,7 @@ namespace S3UploaderLambda
         {
             try
             {
-                var parser = HttpMultipartParser.MultipartFormDataParser.Parse(
+                var parser = MultipartFormDataParser.Parse(
                     new MemoryStream(Convert.FromBase64String(requestBody.Body)));
                 var file = parser.Files.First();
                 _s3Uploader.Write(file.Data);
