@@ -1,0 +1,9 @@
+version: '3.2'
+
+services:
+  ansible:
+    image: ansible:latest
+    command: tail -F anything
+    volumes:
+      - ${HOME}/.azure:/root/.azure
+      - ./ansible:/ansible 

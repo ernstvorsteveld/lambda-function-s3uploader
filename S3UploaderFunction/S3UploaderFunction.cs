@@ -1,9 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using S3Uploader;
 
@@ -22,7 +22,7 @@ namespace S3UploaderFunction
 
         [FunctionName("S3UploaderFunction")]
         public async Task<IActionResult> Run(
-            [Microsoft.Azure.Functions.Worker.HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "upload")]
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "upload")]
             HttpRequest req,
             ILogger log)
         {
@@ -43,12 +43,7 @@ namespace S3UploaderFunction
                 var msg = e.Message;
                 log.LogError("Other exception {Msg}", msg);
                 return new BadRequestObjectResult(
-                    new Error
-                    {
-                        Description = "Other Error, contact system administrator",
-                        Code = "LOGO00001"
-                    }
-                );
+                    new Error("LOGO00001", "Other Error, contact system administrator"));
             }
         }
     }

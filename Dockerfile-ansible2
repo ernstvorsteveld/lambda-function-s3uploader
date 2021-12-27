@@ -1,0 +1,10 @@
+FROM ansible1
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+RUN wget -q https://raw.githubusercontent.com/ansible-collections/azure/dev/requirements-azure.txt; \
+    pip3 install -r requirements-azure.txt; \
+    rm requirements-azure.txt;
+
+RUN ansible-galaxy collection install azure.azcollection --force;

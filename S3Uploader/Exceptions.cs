@@ -19,11 +19,7 @@ namespace S3Uploader
 
         public override Error Get()
         {
-            return new Error
-            {
-                Description = GetMessage(),
-                Code = "LOGO00005"
-            };
+            return new Error("LOGO00005", GetMessage());
         }
 
         public override string GetMessage()
@@ -36,11 +32,7 @@ namespace S3Uploader
     {
         public override Error Get()
         {
-            return new Error
-            {
-                Description = GetMessage(),
-                Code = "LOGO00004"
-            };
+            return new Error("LOGO00004", GetMessage());
         }
 
         public override string GetMessage()
@@ -53,11 +45,7 @@ namespace S3Uploader
     {
         public override Error Get()
         {
-            return new Error
-            {
-                Description = GetMessage(),
-                Code = "LOGO00003"
-            };
+            return new Error("LOGO00003", GetMessage());
         }
 
         public override string GetMessage()
@@ -70,11 +58,7 @@ namespace S3Uploader
     {
         public override Error Get()
         {
-            return new Error
-            {
-                Description = GetMessage(),
-                Code = "LOGO00002"
-            };
+            return new Error("LOGO00002", GetMessage());
         }
 
         public override string GetMessage()

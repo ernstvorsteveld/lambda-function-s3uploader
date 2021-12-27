@@ -21,13 +21,13 @@ namespace S3Uploader
                 Amazon.RegionEndpoint.GetBySystemName(_getter.GetRegion()));
         }
 
-        public async Task<BucketResponse> Write(string name, FilePart filePart)
+        public async Task<BucketResponse> Write(string name, FilePart? filePart)
         {
             PutObjectRequest request = new()
             {
                 BucketName = _getter.GetBucketName(),
                 ContentType = "image/*",
-                InputStream = filePart.Data,
+                InputStream = filePart?.Data,
                 Key = $"{_getter.GetFolder()}/{name}",
                 CannedACL = S3CannedACL.PublicRead,
                 StorageClass = S3StorageClass.Standard

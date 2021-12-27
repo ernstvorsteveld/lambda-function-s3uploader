@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "S3UploaderLambda", "S3UploaderLambda", "{F6BAFBAD-8809-418A-88AC-764FBBF0E832}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD1D4BDA-1250-4CD8-8B84-47475D2F23CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3UploaderLambda", "S3UploaderLambda\src\S3UploaderLambda\S3UploaderLambda.csproj", "{32964904-018A-426A-A743-CA018603CF4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32964904-018A-426A-A743-CA018603CF4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32964904-018A-426A-A743-CA018603CF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32964904-018A-426A-A743-CA018603CF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32964904-018A-426A-A743-CA018603CF4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD1D4BDA-1250-4CD8-8B84-47475D2F23CE} = {F6BAFBAD-8809-418A-88AC-764FBBF0E832}
+		{32964904-018A-426A-A743-CA018603CF4E} = {AD1D4BDA-1250-4CD8-8B84-47475D2F23CE}
+	EndGlobalSection
+EndGlobal

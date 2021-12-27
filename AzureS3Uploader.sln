@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3UploaderFunction", "S3Upl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3Uploader", "S3Uploader\S3Uploader.csproj", "{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ansible", "ansible", "{B6140BF6-3706-4488-8D76-90BBA905323A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

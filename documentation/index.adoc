@@ -9,13 +9,20 @@
 [source,bash]
 ----
 # Create solution
-dotnet new sln -n S3Uploader
+dotnet new sln -n AzureS3Uploader
+dotnet new sln -n AWSS3Uploader
+
+# Create AWS Lambda project
+dotnet new lambda.EmptyFunction --name S3UploaderLambda
+
+# Add to solution
+dotnet sln AWSS3Uploader.sln add S3UploaderLambda/src/S3UploaderLambda/S3UploaderLambda.csproj
 
 # Create Azure function project
 func init S3UploaderFunction --dotnet
 
 # Add to solution
-dotnet sln S3Uploader.sln add S3UploaderFunction/S3UploaderFunction.csproj
+dotnet sln AzureS3Uploader.sln add S3UploaderFunction/S3UploaderFunction.csproj
 
 # Create function
 func new --name S3UploaderFunction --template "HTTP trigger" --authlevel "anonymous"
@@ -24,10 +31,13 @@ func new --name S3UploaderFunction --template "HTTP trigger" --authlevel "anonym
 dotnet new classlib -o S3Uploader
 
 # Add to solution
-dotnet sln S3Uploader.sln add S3Uploader/S3Uploader.csproj
+dotnet sln AzureS3Uploader.sln add S3Uploader/S3Uploader.csproj
+dotnet sln AWSS3Uploader.sln add S3Uploader/S3Uploader.csproj
 
 # Reference projects
 dotnet add S3UploaderFunction/S3UploaderFunction.csproj reference S3Uploader/S3Uploader.csproj
+
+dotnet add S3UploaderLambda/src/S3UploaderLambda/S3UploaderLambda.csproj reference S3Uploader/S3Uploader.csproj
 ----
 
 == Dependencies
@@ -42,13 +52,35 @@ dotnet add package Microsoft.Extensions.DependencyInjection --version 6.0.0
 
 # S3Uploader
 dotnet add package AWSSDK.S3 --version 3.7.7.5
+dotnet add package Amazon.Lambda.Core --version 2.1.0
 dotnet add package HttpMultipartParser --version 5.0.1
+dotnet add package Amazon.Lambda.AspNetCoreServer --version 7.0.1
+dotnet add package Amazon.Lambda.Serialization.SystemTextJson --version 2.2.0
 ----
 
 == Ansible
+
+.Docker
+[source,bash]
+----
+# Create docker image
+docker build -f Dockerfile-ansible1 . -t ansible1
+docker build -f Dockerfile-ansible2 . -t ansible2
+
+# Start container
+docker run -it ansible2
+
+# Execute ansible command
+docker run \
+	-v ${HOME}/.azure:/root/.azure \
+    -v ${PWD}/ansible:/ansible \
+	ansible2 ansible-playbook ansible/function-app-create.yaml
+
+----
 
 .Installation
 [source,bash]
 ----
 pip install ansible[azure]
 ----
+
