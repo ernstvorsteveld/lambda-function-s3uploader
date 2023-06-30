@@ -1,0 +1,39 @@
+@startuml "model"
+
+package "Azure Function" {
+    class FileStoreFunction
+}
+
+package "AWS Lambda" {
+    class FileStoreLambda
+
+}
+
+package FileStorage {
+    interface IFileIo
+    FileStoreLambda -> IFileIo
+    IFileIo <- FileStoreFunction 
+
+    class FileIo implements IFileIo
+    interface IFilesystemIo
+}
+
+package "S3 Functions" {
+    FileIo --> IFilesystemIo
+
+    class S3FilesystemIo implements IFilesystemIo
+    class AmazonS3Client
+    S3FilesystemIo --> AmazonS3Client
+
+}
+
+package AzureContextSupport {
+    FileStoreLambda --> AzurePropertyGetter
+}
+
+package AWSContextSupport {
+    FileStoreFunction --> AWSPropertyGetter
+}
+
+
+@enduml

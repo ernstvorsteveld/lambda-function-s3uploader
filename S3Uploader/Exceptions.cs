@@ -66,4 +66,18 @@ namespace S3Uploader
             return "Missing logo file";
         }
     }
+    
+    public class NoDataFoundException : AbstractS3Exception
+    {
+        public override Error Get()
+        {
+            return new Error("LOGO00006", GetMessage());
+        }
+
+        public override string GetMessage()
+        {
+            return "No data found in request";
+        }
+    }
+
 }

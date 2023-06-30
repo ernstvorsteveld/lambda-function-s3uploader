@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace S3Uploader
 {
-    public class S3FilesystemIo 
+    public class S3FilesystemIo : IFilesystemIo
     {
         private PropertyGetter _getter;
         private AmazonS3Client _s3Client;
@@ -16,19 +16,19 @@ namespace S3Uploader
         {
             _getter = new PropertyGetter(configuration);
             _s3Client = new AmazonS3Client(
-                _getter.GetAccessKey(), 
+                _getter.GetAccessKey(),
                 _getter.GetSecretKey(),
                 Amazon.RegionEndpoint.GetBySystemName(_getter.GetRegion()));
         }
 
-        public async Task<BucketResponse> Write(string name, FilePart? filePart)
+        public async Task<BucketResponse> Write(FilesystemData filesystemData)
         {
             PutObjectRequest request = new()
             {
                 BucketName = _getter.GetBucketName(),
                 ContentType = "image/*",
-                InputStream = filePart?.Data,
-                Key = $"{_getter.GetFolder()}/{name}",
+                InputStream = filesystemData.Data,
+                Key = $"{_getter.GetFolder()}/{filesystemData.Name}",
                 CannedACL = S3CannedACL.PublicRead,
                 StorageClass = S3StorageClass.Standard
             };

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace S3Uploader
 {
-    public class PropertyGetter
+    public class PropertyGetter : IPropertyGetter
     {
         private readonly IConfiguration _configuration;
 

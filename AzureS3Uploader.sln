@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3UploaderFunction", "S3Upl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3Uploader", "S3Uploader\S3Uploader.csproj", "{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S3UploaderFunction.Tests", "S3UploaderFunction.Tests\S3UploaderFunction.Tests.csproj", "{0F6831FA-B295-4BF0-98E0-8FFA3A7D630D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D3F6C41-F972-4D29-B3FC-FC9A6AE0E832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F6831FA-B295-4BF0-98E0-8FFA3A7D630D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6831FA-B295-4BF0-98E0-8FFA3A7D630D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6831FA-B295-4BF0-98E0-8FFA3A7D630D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6831FA-B295-4BF0-98E0-8FFA3A7D630D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

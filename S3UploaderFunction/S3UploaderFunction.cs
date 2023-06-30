@@ -13,11 +13,11 @@ namespace S3UploaderFunction
 {
     public class S3UploaderFunction
     {
-        private static S3Uploader.S3Uploader _s3Uploader;
+        private static IS3Uploader _s3Uploader;
 
-        public S3UploaderFunction(S3Uploader.S3Uploader s3Uploader)
+        public S3UploaderFunction(IS3Uploader iS3Uploader)
         {
-            _s3Uploader = s3Uploader;
+            _s3Uploader = iS3Uploader;
         }
 
         [FunctionName("S3UploaderFunction")]

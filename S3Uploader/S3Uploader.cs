@@ -1,32 +1,48 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HttpMultipartParser;
 
 namespace S3Uploader
 {
-    public class S3Uploader : IFilesystemIo
+    public class S3Uploader : IS3Uploader
     {
-        private readonly S3FilesystemIo _s3FilesystemIo;
-        private readonly PropertyGetter _propertyGetter;
+        private readonly IFilesystemIo _filesystemIo;
+        private readonly IPropertyGetter _propertyGetter;
 
-        public S3Uploader(S3FilesystemIo s3FilesystemIo, PropertyGetter propertyGetter)
+        public S3Uploader(IFilesystemIo filesystemIo, IPropertyGetter propertyGetter)
         {
-            _s3FilesystemIo = s3FilesystemIo;
-            _propertyGetter = propertyGetter;
+            _filesystemIo = filesystemIo;
         }
 
         public async Task Write(Stream stream)
         {
-            MultipartFormDataParser bodyParser = await MultipartFormDataParser.ParseAsync(stream);
-            FilePart? file = bodyParser.Files.FirstOrDefault(x => x.Name == "logo");
-            Validate(file);
-            string id = bodyParser.GetParameterValue("id");
-            BucketResponse response = await _s3FilesystemIo.Write(id, file);
+            BucketResponse response = await _filesystemIo.Write(await GetFilesystemData(stream));
             if (!response.IsSuccess())
             {
                 throw new S3OperationFailedS3Exception(response);
             }
+        }
+
+        private async Task<FilesystemData> GetFilesystemData(Stream stream)
+        {
+            MultipartFormDataParser? bodyParser = null;
+            try
+            {
+                bodyParser = await MultipartFormDataParser.ParseAsync(stream);
+            }
+            catch (MultipartParseException e)
+            {
+                throw new NoDataFoundException();
+            }
+
+            FilePart? file = bodyParser?.Files.FirstOrDefault(x => x.Name == "logo");
+            Validate(file);
+            return new FilesystemDataBuilder()
+                .Name(bodyParser.GetParameterValue("id"))
+                .Stream(file?.Data)
+                .Build();
         }
 
         private void Validate(FilePart? file)
